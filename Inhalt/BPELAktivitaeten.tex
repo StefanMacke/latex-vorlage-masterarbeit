@@ -1,0 +1,158 @@
+\section{Liste möglicher Aktivitäten der BPEL}
+\label{sec:ListeBPELAktivitaeten}
+
+Die folgenden Listen basieren auf \Zitat[Abschnitt~10~u.~11]{OASIS2007a}.
+
+\small
+
+\small
+\begin{longtable}{|p{0.14\textwidth}|p{0.43\textwidth}|p{0.35\textwidth}|}
+\caption{Ausgewählte elementare BPEL-Aktivitäten} \\
+\hline
+\label{tab:ListeBPELAktivitaetenElementar}
+\textbf{Aktivität} & \textbf{Beschreibung} & \textbf{Beispiel} \\
+\hline
+\XMLElement{invoke} & 
+Aufruf einer Operation eines Webservice. Dabei wird zwischen \Fachbegriff{One-way}- und \Fachbegriff{Request-response}-Kommunikation unterschieden. Eventuelle Input- und Output-Nachrichten werden hierbei angegeben. \XMLElement{invoke}-Elemente können weitere Elemente (wie \zB \XMLElement{faultHandler} zur Fehlerbehandlung) beinhalten. & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<invoke 
+  partnerLink="PLName"
+  portType="PTName"
+  operation="OName"
+  inputVariable="VarName"
+  outputVariable="VarName">
+\end{verbatim}\\
+\hline
+\XMLElement{receive} & Empfängt eine Nachricht von einem Partner. Dazu muss die Operation angegeben werden, die der Prozess anbietet um die Nachricht entgegenzunehmen. Die Nachricht kann in einer \XMLElement{variable} gespeichert werden. & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<receive 
+  partnerLink="PLName"
+  portType="PTName"
+  operation="OName"
+  variable="VarName">
+\end{verbatim}\\
+\hline
+\XMLElement{reply} & Antwortet auf die Nachricht eines Partners (nur sinnvoll bei \Fachbegriff{Request-Response}-Kommunikation). & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<reply 
+  partnerLink="PLName"
+  portType="PTName"
+  operation="OName"
+  variable="VarName">
+\end{verbatim}\\
+\hline
+\XMLElement{assign} & Zuweisung von Werten zu Variablen. &
+\vspace{-0.8cm}
+\begin{verbatim}
+<assign>
+  <copy>
+    <from>
+      <literal>
+        <![CDATA[Wert]]>
+      </literal>
+    </from>
+    <to variable="myVar" />
+ </copy>
+</assign>
+\end{verbatim} \\
+\hline
+\XMLElement{throw} & Signalisierung eines Fehlers (analog zu Programmiersprachen). & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<throw 
+  faultName="FName" 
+  faultVariable="VarName">
+\end{verbatim} \\
+\hline
+\XMLElement{wait} & Lässt den Prozess eine gewisse Zeit lang warten. & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<wait>
+  <until>
+    '2002-12-24T18:00'
+  </until>
+</wait>
+\end{verbatim} \\
+\hline
+\XMLElement{exit} & Beendet den Prozess sofort. & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<exit>
+\end{verbatim} \\
+\hline
+\end{longtable}
+
+\small
+\begin{longtable}{|p{0.14\textwidth}|p{0.43\textwidth}|p{0.35\textwidth}|}
+\caption{Ausgewählte strukturierte BPEL-Aktivitäten} \\
+\hline
+\label{tab:ListeBPELAktivitaetenStrukturiert}
+\textbf{Aktivität} & \textbf{Beschreibung} & \textbf{Beispiel} \\
+\hline
+\XMLElement{sequence} & Sequentielles Abarbeiten der angegebenen Aktivitäten. & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<sequence>
+  <invoke>...</invoke>
+  <invoke>...</invoke>
+</sequence>
+\end{verbatim}\\
+\hline
+\XMLElement{flow} & Paralleles Abarbeiten der angegebenen Aktivitäten. & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<flow>
+  <invoke>...</invoke>
+  <invoke>...</invoke>
+</flow>
+\end{verbatim}\\
+\hline
+\XMLElement{if} & Konditionale Abfragen (vergleichbar zur Programmierung). & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<if>
+  <condition>
+    ...
+  </condition>
+  <sequence>
+    ...
+  </sequence>
+  <elseif>
+    ...
+  </elseif>
+  <else>
+    ...
+  </else>
+</if>
+\end{verbatim}\\
+\hline
+\XMLElement{while} & Wiederholung der angegebenen Aktivitäten (vergleichbar zur Programmierung). & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<while>
+  <condition>
+    $orderDetails > 100
+  </condition>
+  <scope>...</scope>
+</while>
+\end{verbatim}\\
+\hline
+\XMLElement{scope} & Verändern des Kontextes in dem die angegebenen Aktivitäten ablaufen. So können \zB neue Variablen deklariert oder eine andere Fehlerbehandlung definiert werden. Das \XMLElement{scope}-Element stellt eigentlich keine Aktivität dar, soll hier aber trotzdem erwähnt werden. & 
+\vspace{-0.8cm}
+\begin{verbatim}
+<scope>
+  <faultHandlers>
+    ...
+  </faultHandlers>
+  <flow>
+    <invoke>...</invoke>
+  </flow>
+</scope>
+\end{verbatim}\\
+\hline
+\end{longtable}
+
+\normalsize

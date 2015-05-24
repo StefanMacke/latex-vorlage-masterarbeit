@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Content-Type: text/xml;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Wed, 13 Jun 2007 11:14:38 GMT
+
+<?xml version='1.0' encoding='UTF-8'?>
+<soapenv:Envelope 
+	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<soapenv:Body>
+		<pf:CreatePersonResponse 
+			xmlns:pf="http://xml.stefanmacke.com/PersonFactory">
+			<person:Person xmlns:person="http://xml.stefanmacke.com/Person">
+				<person:Name>Stefan Macke</person:Name>
+				<person:Age>25</person:Age>
+			</person:Person>
+		</pf:CreatePersonResponse>
+	</soapenv:Body>
+</soapenv:Envelope>

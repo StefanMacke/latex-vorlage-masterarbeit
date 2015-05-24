@@ -1,0 +1,12 @@
+<service name="HelloWorld">
+	<Description>
+		This service greets the world.
+	</Description>
+	<parameter name="ServiceClass" locked="false">
+		HelloWorld
+	</parameter>
+	<operation name="SayHello">
+		<messageReceiver 
+		  class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+	</operation>
+</service>
